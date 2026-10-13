@@ -1,0 +1,6 @@
+﻿{
+    "id":  "cmd-check-002",
+    "exit_code":  0,
+    "output":  "=== GIT ===\r\ngit version 2.55.0.windows.5\r\n=== JAVA ===\r\njava NOT INSTALLED\r\n=== PHP ===\r\nphp NOT INSTALLED\r\n=== FLUTTER ===\r\nflutter NOT INSTALLED\r\n=== NODE ===\r\nv24.19.0\r\n=== ANDROID SDK ===\r\nAndroid SDK folder NOT FOUND\r\n=== DISK C FREE GB ===\r\n630\r\n=== OS ===\r\nMicrosoft Windows 11 Pro\r\n",
+    "finished_at":  "2026-10-13T13:08:57.4542603Z"
+}
