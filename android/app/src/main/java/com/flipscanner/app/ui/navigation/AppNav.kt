@@ -7,6 +7,7 @@ import androidx.navigation.compose.rememberNavController
 import com.flipscanner.app.ui.dashboard.DashboardScreen
 import com.flipscanner.app.ui.home.HomeScreen
 import com.flipscanner.app.ui.inventory.InventoryScreen
+import com.flipscanner.app.ui.listing.ListingScreen
 import com.flipscanner.app.ui.result.ResultScreen
 import com.flipscanner.app.ui.scan.ScanScreen
 
@@ -14,6 +15,7 @@ object Routes {
     const val HOME = "home"
     const val SCAN = "scan"
     const val RESULT = "result"
+    const val LISTING = "listing"
     const val INVENTORY = "inventory"
     const val DASHBOARD = "dashboard"
 }
@@ -36,7 +38,13 @@ fun AppNav() {
             )
         }
         composable(Routes.RESULT) {
-            ResultScreen(onBack = { nav.popBackStack() })
+            ResultScreen(
+                onBack = { nav.popBackStack() },
+                onGenerateListing = { nav.navigate(Routes.LISTING) }
+            )
+        }
+        composable(Routes.LISTING) {
+            ListingScreen(onBack = { nav.popBackStack() })
         }
         composable(Routes.INVENTORY) {
             InventoryScreen(onBack = { nav.popBackStack() })
