@@ -1,5 +1,5 @@
 {
-  "id": "cmd-as-005",
-  "command": "$env:JAVA_HOME = \"C:\\Program Files\\Android\\Android Studio\\jbr\"\n$env:Path = \"C:\\Program Files\\Android\\Android Studio\\jbr\\bin;\" + $env:Path\n\"=== STATE ===\"\n$old = Join-Path $env:LOCALAPPDATA \"Android\\Sdk\"\n$new = \"C:\\Users\\Abdullah G\\Desktop\\Website\\flip-scanner\\Android\\Sdk\"\n\"old exists: $(Test-Path $old)\"\n\"new exists: $(Test-Path $new)\"\nif(Test-Path $new){ \"new contents:\"; Get-ChildItem -LiteralPath $new | Select-Object -ExpandProperty Name }\n\"=== LICENSES DIRS ===\"\n\"old licenses: $(Test-Path (Join-Path $old 'licenses'))\"\n\"new licenses: $(Test-Path (Join-Path $new 'licenses'))\"\n\"=== ACCEPT LICENSES ===\"\n$smNew = Join-Path $new \"cmdline-tools\\latest\\bin\\sdkmanager.bat\"\nif(Test-Path $smNew){ 1..40 | ForEach-Object { \"y\" } | & $smNew --licenses 2>&1 | Select-Object -Last 3; \"licenses step done\" } else { \"sdkmanager NOT FOUND at new location\" }\n\"=== INSTALL PACKAGES ===\"\nif(Test-Path $smNew){ & $smNew --install \"platform-tools\" \"platforms;android-36\" \"build-tools;36.0.0\" 2>&1 | Select-Object -Last 8; \"install step done\" }\n\"=== VERIFY ===\"\n\"adb present: $(Test-Path (Join-Path $new 'platform-tools\\adb.exe'))\"\n\"android-36 present: $(Test-Path (Join-Path $new 'platforms\\android-36'))\"\n\"build-tools 36 present: $(Test-Path (Join-Path $new 'build-tools\\36.0.0'))\"",
-  "timeout_seconds": 180
+  "id": "cmd-as-006",
+  "command": "\"ANDROID_HOME=\" + [Environment]::GetEnvironmentVariable(\"ANDROID_HOME\",\"User\")\n\"ANDROID_SDK_ROOT=\" + [Environment]::GetEnvironmentVariable(\"ANDROID_SDK_ROOT\",\"User\")\n\"JAVA_HOME=\" + [Environment]::GetEnvironmentVariable(\"JAVA_HOME\",\"User\")",
+  "timeout_seconds": 60
 }
