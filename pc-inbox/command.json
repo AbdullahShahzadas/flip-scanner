@@ -1,5 +1,5 @@
 {
-  "id": "cmd-check-002",
-  "command": "function chk($label,$cmdName,$verArgs){ \"=== $label ===\"; if(Get-Command $cmdName -ErrorAction SilentlyContinue){ & $cmdName @verArgs 2>&1 | Select-Object -First 3 } else { \"$cmdName NOT INSTALLED\" } }\nchk \"GIT\" \"git\" @(\"--version\")\nchk \"JAVA\" \"java\" @(\"-version\")\nchk \"PHP\" \"php\" @(\"--version\")\nchk \"FLUTTER\" \"flutter\" @(\"--version\")\nchk \"NODE\" \"node\" @(\"--version\")\n\"=== ANDROID SDK ===\"\n$env:ANDROID_HOME\n$env:ANDROID_SDK_ROOT\n$sdk = Join-Path $env:LOCALAPPDATA \"Android\\Sdk\"\nif(Test-Path $sdk){ $sdk } else { \"Android SDK folder NOT FOUND\" }\n\"=== DISK C FREE GB ===\"\n[Math]::Round((Get-PSDrive C).Free/1GB,1)\n\"=== OS ===\"\n(Get-CimInstance Win32_OperatingSystem).Caption",
+  "id": "cmd-sync-001",
+  "command": "$dest = \"C:\\Users\\Abdullah G\\Desktop\\Website\\flip-scanner-app\"\nif(Test-Path (Join-Path $dest \".git\")){ Set-Location -LiteralPath $dest; git pull --ff-only 2>&1 | Out-String | Write-Output; \"PULL DONE\" } else { git clone \"https://github.com/AbdullahShahzadas/flip-scanner.git\" $dest 2>&1 | Out-String | Write-Output; \"CLONE DONE\" }\n\"=== top level ===\"\nif(Test-Path $dest){ Get-ChildItem -LiteralPath $dest | Select-Object -ExpandProperty Name } else { \"DEST MISSING\" }",
   "timeout_seconds": 180
 }
