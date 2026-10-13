@@ -1,0 +1,5 @@
+{
+  "id": "cmd-rescue-001",
+  "command": "\"=== RESCUE: fixing runner folder ===\"\nSet-Location \"$env:USERPROFILE\\flip-scanner-runner\"\n\"CWD now: \" + (Get-Location).Path\n\"state=\" + ((Get-Content \".runner-state\" -Raw).Trim())\n\"=== RESCUE DONE ===\"",
+  "timeout_seconds": 60
+}
