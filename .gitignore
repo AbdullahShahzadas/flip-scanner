@@ -1,0 +1,14 @@
+# Android
+.gradle/
+build/
+local.properties
+*.iml
+.DS_Store
+
+# PHP
+backend/.env
+backend/vendor/
+
+# Runner state (local only)
+.flip-scanner-runner/
+.runner-last-id.txt

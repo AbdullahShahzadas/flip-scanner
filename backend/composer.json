@@ -1,0 +1,1 @@
+{"autoload":{"psr-4":{"FlipScanner\\":"src/"}},"description":"Flip Scanner REST API (PHP 8)","name":"flipscanner/backend","require":{"ext-json":"*","ext-mbstring":"*","ext-pdo":"*","php":">=8.1"}}
