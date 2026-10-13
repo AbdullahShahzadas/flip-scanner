@@ -1,0 +1,6 @@
+﻿{
+    "id":  "cmd-test-001",
+    "exit_code":  1,
+    "output":  "RUNNER ERROR: You cannot call a method on a null-valued expression.",
+    "finished_at":  "2026-10-13T13:00:32.0928272Z"
+}
