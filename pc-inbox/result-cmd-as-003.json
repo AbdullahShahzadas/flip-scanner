@@ -1,0 +1,6 @@
+﻿{
+    "id":  "cmd-as-003",
+    "exit_code":  0,
+    "output":  "=== STEP 1: download cmdline-tools ===\r\ndownloaded bytes: 153583359\r\n=== STEP 2: extract ===\r\nextracted\r\n=== STEP 3: install packages ===\r\n\r\nERROR: JAVA_HOME is not set and no \u0027java\u0027 command could be found in your PATH.\r\n\r\nPlease set the JAVA_HOME variable in your environment to match the\r\nlocation of your Java installation.\r\n=== STEP 4: licenses ===\r\nPlease set the JAVA_HOME variable in your environment to match the\r\nlocation of your Java installation.\r\nlicenses done\r\n=== STEP 5: env vars ===\r\nenv set\r\n=== VERIFY installed ===\r\n\r\nERROR: JAVA_HOME is not set and no \u0027java\u0027 command could be found in your PATH.\r\n\r\nPlease set the JAVA_HOME variable in your environment to match the\r\nlocation of your Java installation.\r\n",
+    "finished_at":  "2026-10-13T14:13:05.5066230Z"
+}
