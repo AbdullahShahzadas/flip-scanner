@@ -1,5 +1,5 @@
 {
-  "id": "cmd-check-001",
-  "command": "\"=== GIT ===\"; git --version; \"=== JAVA ===\"; java -version 2>&1; \"=== PHP ===\"; php --version 2>&1 | Select-Object -First 2; \"=== ANDROID SDK ===\"; $env:ANDROID_HOME; $env:ANDROID_SDK_ROOT; \"=== FLUTTER ===\"; flutter --version 2>&1 | Select-Object -First 3; \"=== NODE ===\"; node --version 2>&1; \"=== DISK C FREE GB ===\"; [math]::Round((Get-PSDrive C).Free/1GB,1); \"=== OS ===\"; (Get-CimInstance Win32_OperatingSystem).Caption",
-  "timeout_seconds": 120
+  "id": "cmd-check-002",
+  "command": "function chk($label,$cmdName,$verArgs){ \"=== $label ===\"; if(Get-Command $cmdName -ErrorAction SilentlyContinue){ & $cmdName @verArgs 2>&1 | Select-Object -First 3 } else { \"$cmdName NOT INSTALLED\" } }\nchk \"GIT\" \"git\" @(\"--version\")\nchk \"JAVA\" \"java\" @(\"-version\")\nchk \"PHP\" \"php\" @(\"--version\")\nchk \"FLUTTER\" \"flutter\" @(\"--version\")\nchk \"NODE\" \"node\" @(\"--version\")\n\"=== ANDROID SDK ===\"\n$env:ANDROID_HOME\n$env:ANDROID_SDK_ROOT\n$sdk = Join-Path $env:LOCALAPPDATA \"Android\\Sdk\"\nif(Test-Path $sdk){ $sdk } else { \"Android SDK folder NOT FOUND\" }\n\"=== DISK C FREE GB ===\"\n[Math]::Round((Get-PSDrive C).Free/1GB,1)\n\"=== OS ===\"\n(Get-CimInstance Win32_OperatingSystem).Caption",
+  "timeout_seconds": 180
 }
