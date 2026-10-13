@@ -1,0 +1,6 @@
+﻿{
+    "id":  "cmd-as-002",
+    "exit_code":  0,
+    "output":  "=== JBR ===\r\nTrue\r\n=== STUDIO VER ===\r\n262.9437.185.0-AI\r\n=== SDK CANDIDATES ===\r\nC:\\Users\\Abdullah G\\AppData\\Local\\Android\\Sdk : False\r\nC:\\Android\\Sdk : False\r\n",
+    "finished_at":  "2026-10-13T13:50:17.0301707Z"
+}
