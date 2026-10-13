@@ -1,5 +1,5 @@
 {
-  "id": "cmd-sync-001",
-  "command": "$dest = \"C:\\Users\\Abdullah G\\Desktop\\Website\\flip-scanner-app\"\nif(Test-Path (Join-Path $dest \".git\")){ Set-Location -LiteralPath $dest; git pull --ff-only 2>&1 | Out-String | Write-Output; \"PULL DONE\" } else { git clone \"https://github.com/AbdullahShahzadas/flip-scanner.git\" $dest 2>&1 | Out-String | Write-Output; \"CLONE DONE\" }\n\"=== top level ===\"\nif(Test-Path $dest){ Get-ChildItem -LiteralPath $dest | Select-Object -ExpandProperty Name } else { \"DEST MISSING\" }",
-  "timeout_seconds": 180
+  "id": "cmd-as-001",
+  "command": "\"=== WINGET ===\"; if(Get-Command winget -ErrorAction SilentlyContinue){ winget --version 2>&1 | Select-Object -First 1; winget search --id Google.AndroidStudio --exact 2>&1 | Select-Object -First 4 } else { \"winget NOT FOUND\" }\n\"=== ADMIN ===\"; ([Security.Principal.WindowsPrincipal][Security.Principal.WindowsIdentity]::GetCurrent()).IsInRole([Security.Principal.WindowsBuiltInRole]::Administrator)\n\"=== STUDIO PRESENT ===\"; Test-Path \"C:\\Program Files\\Android\\Android Studio\\bin\\studio64.exe\"",
+  "timeout_seconds": 120
 }
