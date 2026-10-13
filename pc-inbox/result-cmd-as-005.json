@@ -1,0 +1,6 @@
+﻿{
+    "id":  "cmd-as-005",
+    "exit_code":  0,
+    "output":  "=== STATE ===\r\nold exists: False\r\nnew exists: True\r\nnew contents:\r\ncmdline-tools\r\nlicenses\r\n=== LICENSES DIRS ===\r\nold licenses: False\r\nnew licenses: True\r\n=== ACCEPT LICENSES ===\r\n\r\nAll SDK package licenses accepted.\r\n\r\nlicenses step done\r\n=== INSTALL PACKAGES ===\r\n[=================================      ] 83% Unzipping... platform-tools/NOTICE\r\n[=================================      ] 84% Unzipping... platform-tools/NOTICE\r\n[=================================      ] 84% Unzipping... platform-tools/source\r\n[=================================      ] 84% Unzipping... platform-tools/sqlite\r\n[=================================      ] 85% Unzipping... platform-tools/sqlite\r\n[=======================================] 100% Unzipping... platform-tools/sqlit\r\n\r\n\r\ninstall step done\r\n=== VERIFY ===\r\nadb present: True\r\nandroid-36 present: True\r\nbuild-tools 36 present: True\r\n",
+    "finished_at":  "2026-10-13T14:21:06.6889845Z"
+}
