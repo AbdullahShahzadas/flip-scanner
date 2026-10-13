@@ -1,0 +1,6 @@
+﻿{
+    "id":  "cmd-as-001",
+    "exit_code":  0,
+    "output":  "=== WINGET ===\r\nv1.29.380\r\nName           Id                   Version    Source\r\n------------------------------------------------------\r\nAndroid Studio Google.AndroidStudio 2026.2.1.8 winget\r\n=== ADMIN ===\r\nFalse\r\n=== STUDIO PRESENT ===\r\nTrue\r\n",
+    "finished_at":  "2026-10-13T13:49:08.7836318Z"
+}
