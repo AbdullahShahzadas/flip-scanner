@@ -1,5 +1,5 @@
 {
-  "id": "cmd-test-001",
-  "command": "whoami; $env:COMPUTERNAME; Get-Date -Format o",
+  "id": "cmd-test-002",
+  "command": "whoami; $env:COMPUTERNAME",
   "timeout_seconds": 60
 }
