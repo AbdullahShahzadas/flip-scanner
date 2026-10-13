@@ -82,6 +82,10 @@ while ($true) {
         }
         if ($null -eq $out) { $out = "" }
 
+        # v3: the command may have changed the working directory - go back
+        # to the runner folder before the git ops below, or the result is lost.
+        Set-Location -LiteralPath $RunnerDir
+
         $result = [ordered]@{
           id          = $id
           exit_code   = $code
@@ -94,6 +98,7 @@ while ($true) {
         git add $resRel 2>$null
         git -c user.name="pc-runner" -c user.email="pc-runner@local" commit -m "result $id" --quiet 2>$null
         git push --quiet 2>$null
+        if ($LASTEXITCODE -ne 0) { Log "WARNING: git push failed - result NOT sent" }
 
         $lastId = $id
         Set-Content $StateFile $lastId
