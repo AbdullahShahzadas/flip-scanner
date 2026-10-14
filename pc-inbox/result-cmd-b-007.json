@@ -1,0 +1,6 @@
+﻿{
+    "id":  "cmd-b-007",
+    "exit_code":  0,
+    "output":  "downloading wrapper jar...\r\nwriting gradlew.bat...\r\nwriting properties...\r\n=== verify ===\r\nTrue\r\nTrue\r\n43583\r\n",
+    "finished_at":  "2026-10-14T10:32:57.8866213Z"
+}
