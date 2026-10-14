@@ -1,0 +1,6 @@
+﻿{
+    "id":  "cmd-b-010",
+    "exit_code":  0,
+    "output":  ".\\gradlew.bat : G\\Desktop\\Website\\flip-scanner-app\\android\\\"\"==\"\"\"\" was unexpected at this time.\r\nAt line:6 char:1\r\n+ .\\gradlew.bat assembleDebug 2\u003e\u00261 | Select-Object -Last 30\r\n+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : NotSpecified: (G\\Desktop\\Websi...d at this time.:String) [], RemoteException\r\n    + FullyQualifiedErrorId : NativeCommandError\r\n \r\n",
+    "finished_at":  "2026-10-14T10:50:22.6966236Z"
+}
