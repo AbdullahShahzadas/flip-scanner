@@ -1,0 +1,6 @@
+﻿{
+    "id":  "cmd-b-008",
+    "exit_code":  0,
+    "output":  "=== commit wrapper ===\r\n create mode 100644 android/gradlew.bat\r\nfatal: unable to auto-detect email address (got \u0027Abdullah G@DESKTOP-T9R5DCQ.(none)\u0027)\r\n\r\n=== build with wrapper ===\r\ngradlew.bat : G\\Desktop\\Website\\flip-scanner-app\\android\\\"\"==\"\"\"\" was unexpected at this time.\r\nAt line:13 char:1\r\n+ \u0026 (Join-Path $android \"gradlew.bat\") -p $android assembleDebug 2\u003e\u00261 | ...\r\n+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : NotSpecified: (G\\Desktop\\Websi...d at this time.:String) [], RemoteException\r\n    + FullyQualifiedErrorId : NativeCommandError\r\n \r\n",
+    "finished_at":  "2026-10-14T10:41:07.6573004Z"
+}
