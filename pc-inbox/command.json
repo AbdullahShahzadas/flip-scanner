@@ -1,5 +1,5 @@
 {
-  "id": "cmd-b-013",
-  "command": "$app = \"C:\\Users\\Abdullah G\\Desktop\\Website\\flip-scanner-app\"\n$android = Join-Path $app \"android\"\ngit -C $app pull 2>&1 | Select-Object -Last 1\n$env:JAVA_HOME = \"C:\\Users\\Abdullah G\\Desktop\\Website\\flip-scanner\\tools\\jdk-21\"\n$env:ANDROID_HOME = \"C:\\Users\\Abdullah G\\Desktop\\Website\\flip-scanner\\Android\\Sdk\"\n$env:ANDROID_SDK_ROOT = $env:ANDROID_HOME\nPush-Location $android\n.\\gradlew.bat assembleDebug 2>&1 | Select-Object -Last 40\n\"=== APK? ===\"\nGet-ChildItem -Path (Join-Path $android \"app\\build\\outputs\\apk\\debug\") -Filter \"*.apk\" -ErrorAction SilentlyContinue | Select-Object Name, @{N=\"MB\";E={[math]::Round($_.Length/1MB,1)}}\nPop-Location\n",
-  "timeout_seconds": 1200
+  "id": "cmd-b-014",
+  "command": "$app = \"C:\\Users\\Abdullah G\\Desktop\\Website\\flip-scanner-app\"\n\"=== git status ===\"\ngit -C $app status --short 2>&1 | Select-Object -First 10\n\"=== log ===\"\ngit -C $app log --oneline -3 2>&1\n\"=== force sync ===\"\ngit -C $app fetch origin 2>&1 | Select-Object -Last 2\ngit -C $app reset --hard origin/main 2>&1 | Select-Object -Last 1\n\"=== verify kapt ===\"\nSelect-String -Path (Join-Path $app \"android\\app\\build.gradle.kts\") -Pattern \"kapt\" | Select-Object -First 3\n",
+  "timeout_seconds": 120
 }
