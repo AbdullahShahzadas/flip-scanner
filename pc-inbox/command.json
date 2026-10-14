@@ -1,5 +1,5 @@
 {
-  "id": "cmd-uninstall-001",
-  "command": "\"=== finding Android Studio uninstaller ===\"\n$u = \"C:\\Program Files\\Android\\Android Studio\\uninstall.exe\"\nif (Test-Path $u) {\n  \"found, uninstalling silently...\"\n  Start-Process -FilePath $u -ArgumentList \"/S\" -Wait\n  \"done\"\n} else {\n  \"uninstaller not found at default path\"\n  Get-ChildItem \"C:\\Program Files\\Android\" -ErrorAction SilentlyContinue | Select-Object Name\n}\n",
-  "timeout_seconds": 300
+  "id": "cmd-p3-build",
+  "command": "$app = \"C:\\Users\\Abdullah G\\Desktop\\Website\\flip-scanner-app\"\n$android = Join-Path $app \"android\"\ngit -C $app reset --hard origin/main 2>&1 | Select-Object -Last 1\n$wdir = Join-Path $android \"gradle\\wrapper\"\nNew-Item -ItemType Directory -Force -Path $wdir | Out-Null\nif (-not (Test-Path (Join-Path $android \"gradlew.bat\"))) {\n  Invoke-WebRequest -Uri \"https://github.com/gradle/gradle/raw/v8.10.2/gradlew.bat\" -OutFile (Join-Path $android \"gradlew.bat\")\n  Invoke-WebRequest -Uri \"https://github.com/gradle/gradle/raw/v8.10.2/gradle/wrapper/gradle-wrapper.jar\" -OutFile (Join-Path $wdir \"gradle-wrapper.jar\")\n}\n$env:JAVA_HOME = \"C:\\Users\\Abdullah G\\Desktop\\Website\\flip-scanner\\tools\\jdk-21\"\n$env:ANDROID_HOME = \"C:\\Users\\Abdullah G\\Desktop\\Website\\flip-scanner\\Android\\Sdk\"\n$env:ANDROID_SDK_ROOT = $env:ANDROID_HOME\nPush-Location $android\n.\\gradlew.bat assembleDebug 2>&1 | Select-Object -Last 25\n\"=== APK? ===\"\nGet-ChildItem -Path (Join-Path $android \"app\\build\\outputs\\apk\\debug\") -Filter \"*.apk\" -ErrorAction SilentlyContinue | Select-Object Name, @{N=\"MB\";E={[math]::Round($_.Length/1MB,1)}}\nPop-Location\n",
+  "timeout_seconds": 1200
 }
