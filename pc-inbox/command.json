@@ -1,5 +1,5 @@
 {
-  "id": "cmd-b-017",
-  "command": "$app = \"C:\\Users\\Abdullah G\\Desktop\\Website\\flip-scanner-app\"\ngit -C $app reset --hard origin/main 2>&1 | Select-Object -Last 1\n\"=== check jvmTarget on PC ===\"\nSelect-String -Path (Join-Path $app \"android\\app\\build.gradle.kts\") -Pattern \"jvmTarget|sourceCompatibility\" \n",
-  "timeout_seconds": 60
+  "id": "cmd-b-018",
+  "command": "$app = \"C:\\Users\\Abdullah G\\Desktop\\Website\\flip-scanner-app\"\n$android = Join-Path $app \"android\"\ngit -C $app reset --hard origin/main 2>&1 | Select-Object -Last 1\n$env:JAVA_HOME = \"C:\\Users\\Abdullah G\\Desktop\\Website\\flip-scanner\\tools\\jdk-21\"\n$env:ANDROID_HOME = \"C:\\Users\\Abdullah G\\Desktop\\Website\\flip-scanner\\Android\\Sdk\"\n$env:ANDROID_SDK_ROOT = $env:ANDROID_HOME\nPush-Location $android\n.\\gradlew.bat assembleDebug 2>&1 | Select-Object -Last 30\n\"=== APK? ===\"\nGet-ChildItem -Path (Join-Path $android \"app\\build\\outputs\\apk\\debug\") -Filter \"*.apk\" -ErrorAction SilentlyContinue | Select-Object Name, @{N=\"MB\";E={[math]::Round($_.Length/1MB,1)}}\nPop-Location\n",
+  "timeout_seconds": 1200
 }
