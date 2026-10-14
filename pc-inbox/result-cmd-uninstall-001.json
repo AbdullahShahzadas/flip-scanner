@@ -1,0 +1,6 @@
+﻿{
+    "id":  "cmd-uninstall-001",
+    "exit_code":  0,
+    "output":  "=== finding Android Studio uninstaller ===\r\nfound, uninstalling silently...\r\ndone\r\n",
+    "finished_at":  "2026-10-14T13:00:37.4165800Z"
+}
