@@ -17,6 +17,8 @@ android {
         targetSdk = 36
         versionCode = 1
         versionName = "1.0"
+        // Override with -PflipApiUrl=https://your-server/ or edit here.
+        buildConfigField("String", "FLIP_API_BASE_URL", """ + (project.findProperty("flipApiUrl") as String? ?: "") + """)
     }
 
     buildTypes {
@@ -80,7 +82,9 @@ dependencies {
     // Networking (Part 3: backend API)
     implementation("com.squareup.retrofit2:retrofit:2.11.0")
     implementation("com.squareup.okhttp3:okhttp:4.12.0")
+    implementation("com.squareup.okhttp3:logging-interceptor:4.12.0")
     implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.8.1")
+    implementation("com.jakewharton.retrofit:retrofit2-kotlinx-serialization-converter:1.0.0")
 
     // Room offline cache (Part 4: inventory)
     implementation("androidx.room:room-runtime:2.7.1")
