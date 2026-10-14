@@ -1,5 +1,5 @@
 {
-  "id": "cmd-b-011",
-  "command": "$android = \"C:\\Users\\Abdullah G\\Desktop\\Website\\flip-scanner-app\\android\"\n\"downloading official gradlew.bat...\"\nInvoke-WebRequest -Uri \"https://github.com/gradle/gradle/raw/v8.10.2/gradlew.bat\" -OutFile (Join-Path $android \"gradlew.bat\")\n\"=== test ===\"\n$env:JAVA_HOME = \"C:\\Users\\Abdullah G\\Desktop\\Website\\flip-scanner\\tools\\jdk-21\"\n$env:ANDROID_HOME = \"C:\\Users\\Abdullah G\\Desktop\\Website\\flip-scanner\\Android\\Sdk\"\n$env:ANDROID_SDK_ROOT = $env:ANDROID_HOME\nPush-Location $android\n.\\gradlew.bat --version 2>&1 | Select-Object -First 8\nPop-Location\n",
-  "timeout_seconds": 180
+  "id": "cmd-b-012",
+  "command": "$android = \"C:\\Users\\Abdullah G\\Desktop\\Website\\flip-scanner-app\\android\"\n$env:JAVA_HOME = \"C:\\Users\\Abdullah G\\Desktop\\Website\\flip-scanner\\tools\\jdk-21\"\n$env:ANDROID_HOME = \"C:\\Users\\Abdullah G\\Desktop\\Website\\flip-scanner\\Android\\Sdk\"\n$env:ANDROID_SDK_ROOT = $env:ANDROID_HOME\nPush-Location $android\n.\\gradlew.bat assembleDebug 2>&1 | Select-Object -Last 40\n\"=== APK? ===\"\nGet-ChildItem -Path (Join-Path $android \"app\\build\\outputs\\apk\\debug\") -Filter \"*.apk\" -ErrorAction SilentlyContinue | Select-Object Name, Length\nPop-Location\n",
+  "timeout_seconds": 1200
 }
