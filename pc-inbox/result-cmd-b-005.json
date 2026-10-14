@@ -1,0 +1,6 @@
+﻿{
+    "id":  "cmd-b-005",
+    "exit_code":  0,
+    "output":  "downloading JDK 21...\r\nextracting...\r\nJDK ready\r\njava.exe : openjdk version \"21.0.12.1\" 2026-08-18 LTS\r\nAt line:15 char:1\r\n+ \u0026 (Join-Path $jdkDir \"bin\\java.exe\") -version 2\u003e\u00261 | Select-Object -F ...\r\n+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : NotSpecified: (openjdk version... 2026-08-18 LTS:String) [], RemoteException\r\n    + FullyQualifiedErrorId : NativeCommandError\r\n \r\nOpenJDK Runtime Environment Temurin-21.0.12.1+1 (build 21.0.12.1+1-LTS)\r\n=== generating wrapper with JDK 21 ===\r\n\u003e Run with --info or --debug option to get more log output.\r\n\u003e Run with --scan to get full insights.\r\n\u003e Get more help at https://help.gradle.org.\r\n\r\nBUILD FAILED in 12m 16s\r\nWRAPPER FAILED\r\n",
+    "finished_at":  "2026-10-14T08:15:42.6886327Z"
+}
