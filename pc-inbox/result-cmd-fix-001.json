@@ -1,0 +1,6 @@
+﻿{
+    "id":  "cmd-fix-001",
+    "exit_code":  0,
+    "output":  "=== abort stuck rebase ===\r\nHEAD is now at 69f3d47 abort stuck rebase cmd-fix-001\r\n=== clean status ===\r\n69f3d47 abort stuck rebase cmd-fix-001\r\n",
+    "finished_at":  "2026-10-14T11:54:47.9347159Z"
+}
