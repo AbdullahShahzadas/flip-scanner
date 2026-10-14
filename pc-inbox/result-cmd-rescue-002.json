@@ -1,6 +1,6 @@
 ﻿{
     "id":  "cmd-rescue-002",
     "exit_code":  0,
-    "output":  "=== FIXING RUNNER GIT ===\r\nno lock file\r\nHEAD is now at 69cd267 result cmd-rescue-002\r\n=== DONE ===\r\n",
-    "finished_at":  "2026-10-14T11:53:36.2782658Z"
+    "output":  "=== FIXING RUNNER GIT ===\r\nno lock file\r\ngit : From https://github.com/AbdullahShahzadas/flip-scanner\r\nAt line:6 char:1\r\n+ git -C $rd fetch origin 2\u003e\u00261 | Select-Object -First 3\r\n+ ~~~~~~~~~~~~~~~~~~~~~~~~~~~~\r\n    + CategoryInfo          : NotSpecified: (From https://gi...as/flip-scanner:String \r\n   ) [], RemoteException\r\n    + FullyQualifiedErrorId : NativeCommandError\r\n \r\n   6ff502c..69f3d47  main       -\u003e origin/main\r\nHEAD is now at 69f3d47 abort stuck rebase cmd-fix-001\r\n=== DONE ===\r\n",
+    "finished_at":  "2026-10-14T11:54:23.0544651Z"
 }
