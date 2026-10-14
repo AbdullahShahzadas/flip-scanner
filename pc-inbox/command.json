@@ -1,5 +1,5 @@
 {
-  "id": "cmd-b-009",
-  "command": "$app = \"C:\\Users\\Abdullah G\\Desktop\\Website\\flip-scanner-app\"\n$android = Join-Path $app \"android\"\n\"=== fix git identity ===\"\ngit -C $app config user.name \"pc-runner\"\ngit -C $app config user.email \"pc-runner@local\"\ngit -C $app commit -m \"Add Gradle wrapper (manual)\" 2>&1 | Select-Object -Last 1\ngit -C $app pull --rebase 2>&1 | Select-Object -Last 1\ngit -C $app push 2>&1 | Select-Object -Last 1\n\"=== build ===\"\n$env:JAVA_HOME = \"C:\\Users\\Abdullah G\\Desktop\\Website\\flip-scanner\\tools\\jdk-21\"\n$env:ANDROID_HOME = \"C:\\Users\\Abdullah G\\Desktop\\Website\\flip-scanner\\Android\\Sdk\"\n$env:ANDROID_SDK_ROOT = $env:ANDROID_HOME\n$gw = Join-Path $android \"gradlew.bat\"\n& cmd /c \"`\"$gw`\" -p `\"$android`\" assembleDebug\" 2>&1 | Select-Object -Last 30\n",
+  "id": "cmd-b-010",
+  "command": "$android = \"C:\\Users\\Abdullah G\\Desktop\\Website\\flip-scanner-app\\android\"\n$env:JAVA_HOME = \"C:\\Users\\Abdullah G\\Desktop\\Website\\flip-scanner\\tools\\jdk-21\"\n$env:ANDROID_HOME = \"C:\\Users\\Abdullah G\\Desktop\\Website\\flip-scanner\\Android\\Sdk\"\n$env:ANDROID_SDK_ROOT = $env:ANDROID_HOME\nPush-Location $android\n.\\gradlew.bat assembleDebug 2>&1 | Select-Object -Last 30\nPop-Location\n",
   "timeout_seconds": 900
 }
