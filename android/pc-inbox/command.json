@@ -1,5 +1,5 @@
 {
-  "id": "cmd-rescue-001",
-  "command": "\"=== RESCUE: fixing runner folder ===\"\nSet-Location \"$env:USERPROFILE\\flip-scanner-runner\"\n\"CWD now: \" + (Get-Location).Path\n\"state=\" + ((Get-Content \".runner-state\" -Raw).Trim())\n\"=== RESCUE DONE ===\"",
-  "timeout_seconds": 60
+  "id": "cmd-rescue-002",
+  "command": "$rd = \"$env:USERPROFILE\\flip-scanner-runner\"\n\"=== FIXING RUNNER GIT ===\"\nSet-Location $env:USERPROFILE\n$lock = Join-Path $rd \".git\\index.lock\"\nif (Test-Path $lock) { Remove-Item $lock -Force; \"removed index.lock\" } else { \"no lock file\" }\ngit -C $rd fetch origin 2>&1 | Select-Object -First 3\ngit -C $rd reset --hard origin/main 2>&1 | Select-Object -First 3\n\"=== DONE ===\"\nSet-Location $rd",
+  "timeout_seconds": 120
 }
