@@ -1,0 +1,6 @@
+﻿{
+    "id":  "cmd-b-017",
+    "exit_code":  0,
+    "output":  "HEAD is now at 5e31ee2 rebuild after JVM fix cmd-b-016\r\n=== check jvmTarget on PC ===\r\n\r\nC:\\Users\\Abdullah G\\Desktop\\Website\\flip-scanner-app\\android\\app\\build.gradle.kts:33:        sourceCompatibility = \r\nJavaVersion.VERSION_17\r\nC:\\Users\\Abdullah G\\Desktop\\Website\\flip-scanner-app\\android\\app\\build.gradle.kts:37:        jvmTarget = \"17\"\r\n\r\n\r\n",
+    "finished_at":  "2026-10-14T11:05:39.8110722Z"
+}
