@@ -1,5 +1,5 @@
 {
-  "id": "cmd-check-apk",
-  "command": "$apk = \"C:\\Users\\Abdullah G\\Desktop\\Website\\flip-scanner-app\\android\\app\\build\\outputs\\apk\\debug\\app-debug.apk\"\nif (Test-Path $apk) {\n  $f = Get-Item $apk\n  \"APK date: \" + $f.LastWriteTime.ToString(\"yyyy-MM-dd HH:mm\")\n  \"APK size MB: \" + [math]::Round($f.Length/1MB,1)\n} else {\n  \"APK not found\"\n}\n",
-  "timeout_seconds": 60
+  "id": "cmd-get-errors",
+  "command": "$app = \"C:\\Users\\Abdullah G\\Desktop\\Website\\flip-scanner-app\"\n$dir = if (Test-Path \"$app\\android\\gradlew.bat\") { \"$app\\android\" } else { $app }\n$env:JAVA_HOME = \"C:\\Users\\Abdullah G\\Desktop\\Website\\flip-scanner\\tools\\jdk-21\"\n$env:ANDROID_HOME = \"C:\\Users\\Abdullah G\\Desktop\\Website\\flip-scanner\\Android\\Sdk\"\n$env:ANDROID_SDK_ROOT = $env:ANDROID_HOME\n$env:Path = \"$env:JAVA_HOME\\bin;$env:Path\"\ncd $dir\n\"=== running build, capturing errors ===\"\n.\\gradlew.bat assembleDebug 2>&1 | Select-String -Pattern \"^e:|error:|FAILED\" | Select-Object -First 25\n\"=== done ===\"\n",
+  "timeout_seconds": 600
 }
