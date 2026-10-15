@@ -10,6 +10,7 @@ import com.flipscanner.app.ui.inventory.InventoryScreen
 import com.flipscanner.app.ui.listing.ListingScreen
 import com.flipscanner.app.ui.result.ResultScreen
 import com.flipscanner.app.ui.scan.ScanScreen
+import com.flipscanner.app.ui.subscription.SubscriptionScreen
 
 object Routes {
     const val HOME = "home"
@@ -18,6 +19,7 @@ object Routes {
     const val LISTING = "listing"
     const val INVENTORY = "inventory"
     const val DASHBOARD = "dashboard"
+    const val SUBSCRIPTION = "subscription"
 }
 
 @Composable
@@ -28,7 +30,8 @@ fun AppNav() {
             HomeScreen(
                 onScan = { nav.navigate(Routes.SCAN) },
                 onInventory = { nav.navigate(Routes.INVENTORY) },
-                onDashboard = { nav.navigate(Routes.DASHBOARD) }
+                onDashboard = { nav.navigate(Routes.DASHBOARD) },
+                onSubscribe = { nav.navigate(Routes.SUBSCRIPTION) }
             )
         }
         composable(Routes.SCAN) {
@@ -51,6 +54,9 @@ fun AppNav() {
         }
         composable(Routes.DASHBOARD) {
             DashboardScreen(onBack = { nav.popBackStack() })
+        }
+        composable(Routes.SUBSCRIPTION) {
+            SubscriptionScreen(onBack = { nav.popBackStack() })
         }
     }
 }

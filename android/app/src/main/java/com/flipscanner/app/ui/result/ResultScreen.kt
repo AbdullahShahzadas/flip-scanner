@@ -16,11 +16,16 @@ import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.OutlinedButton
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
+import androidx.compose.runtime.remember
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
@@ -43,8 +48,18 @@ fun ResultScreen(
     onGenerateListing: () -> Unit,
     vm: ResultViewModel = hiltViewModel()
 ) {
+    val snackbar = remember { SnackbarHostState() }
+
+    LaunchedEffect(vm.saveMessage) {
+        vm.saveMessage?.let {
+            snackbar.showSnackbar(it)
+            vm.dismissSaveMessage()
+        }
+    }
+
     Scaffold(
-        topBar = { TopAppBar(title = { Text("Scan result") }) }
+        topBar = { TopAppBar(title = { Text("Scan result") }) },
+        snackbarHost = { SnackbarHost(snackbar) }
     ) { pad ->
         when {
             vm.isLoading -> {
@@ -210,6 +225,14 @@ fun ResultScreen(
                                     color = verdictColor(vm.verdict)
                                 )
                             }
+                        }
+                    }
+                    item {
+                        OutlinedButton(
+                            onClick = { vm.saveToInventory() },
+                            modifier = Modifier.fillMaxWidth().height(56.dp)
+                        ) {
+                            Text("Save to inventory")
                         }
                     }
                     item {
