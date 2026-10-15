@@ -8,7 +8,6 @@ import androidx.lifecycle.viewModelScope
 import com.flipscanner.app.data.ScanSession
 import com.flipscanner.app.data.model.ScanResult
 import com.flipscanner.app.data.model.mockScanResult
-import com.flipscanner.app.data.repository.InventoryRepository
 import com.flipscanner.app.data.repository.ScanRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
 import kotlinx.coroutines.launch
@@ -18,8 +17,7 @@ import javax.inject.Inject
 @HiltViewModel
 class ResultViewModel @Inject constructor(
     private val session: ScanSession,
-    private val repository: ScanRepository,
-    private val inventoryRepository: InventoryRepository
+    private val repository: ScanRepository
 ) : ViewModel() {
 
     var result by mutableStateOf<ScanResult?>(null)
@@ -29,8 +27,6 @@ class ResultViewModel @Inject constructor(
     var error by mutableStateOf<String?>(null)
         private set
     var usingDemoData by mutableStateOf(false)
-        private set
-    var saveMessage by mutableStateOf<String?>(null)
         private set
 
     var buyPrice by mutableStateOf("")
@@ -44,9 +40,9 @@ class ResultViewModel @Inject constructor(
     }
 
     private fun loadResult() {
-        val paths = session.photoPaths
-        if (paths.isEmpty()) {
-            error = "No photos found. Please scan again."
+        val photoPath = session.lastPhotoPath
+        if (photoPath.isNullOrBlank()) {
+            error = "No photo found. Please scan again."
             isLoading = false
             return
         }
@@ -55,58 +51,35 @@ class ResultViewModel @Inject constructor(
             isLoading = true
             error = null
             usingDemoData = false
-            saveMessage = null
 
-            // Convert every session photo path to an existing file.
-            val files = paths.mapNotNull { path ->
-                try {
-                    File(path).takeIf { it.exists() && it.isFile }
-                } catch (_: Exception) {
-                    null
-                }
+            // Gallery URIs can't be sent as files; fall back to demo data.
+            val file = try {
+                File(photoPath).takeIf { it.exists() && it.isFile }
+            } catch (_: Exception) {
+                null
             }
 
-            if (files.isEmpty()) {
-                // Demo fallback when no usable files exist.
-                result = mockScanResult(paths.lastOrNull())
+            if (file == null) {
+                // Demo fallback for gallery URIs in v1.
+                result = mockScanResult(photoPath)
                 usingDemoData = true
                 isLoading = false
                 return@launch
             }
 
-            when (val r = repository.scanPhotos(files)) {
+            when (val r = repository.scanPhotos(listOf(file))) {
                 is ScanRepository.Result.Success -> {
                     result = r.scan
                 }
                 is ScanRepository.Result.Error -> {
                     // Fall back to demo data so the UI still works offline.
-                    result = mockScanResult(files.firstOrNull()?.absolutePath)
+                    result = mockScanResult(photoPath)
                     usingDemoData = true
                     error = r.message
                 }
             }
             isLoading = false
         }
-    }
-
-    /** Saves the current scan result into the Room inventory. */
-    fun saveToInventory() {
-        val r = result ?: return
-        viewModelScope.launch {
-            inventoryRepository.addItem(
-                itemName = r.itemName,
-                brand = r.brand,
-                category = r.category,
-                condition = r.condition,
-                photoPath = r.photoPath,
-                buyPrice = buyPrice.toDoubleOrNull() ?: 0.0
-            )
-            saveMessage = "Saved to inventory."
-        }
-    }
-
-    fun dismissSaveMessage() {
-        saveMessage = null
     }
 
     private val buy: Double

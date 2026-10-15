@@ -28,8 +28,7 @@ import androidx.compose.ui.unit.dp
 fun HomeScreen(
     onScan: () -> Unit,
     onInventory: () -> Unit,
-    onDashboard: () -> Unit,
-    onSubscribe: () -> Unit = {}
+    onDashboard: () -> Unit
 ) {
     Scaffold { pad ->
         LazyColumn(
@@ -65,11 +64,6 @@ fun HomeScreen(
             item {
                 TextButton(onClick = onInventory) {
                     Text("Open inventory")
-                }
-            }
-            item {
-                TextButton(onClick = onSubscribe) {
-                    Text("Go Pro — subscriptions")
                 }
             }
         }

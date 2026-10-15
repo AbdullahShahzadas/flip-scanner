@@ -21,32 +21,14 @@ class ScanViewModel @Inject constructor(
     @ApplicationContext private val appContext: Context
 ) : ViewModel() {
 
-    companion object {
-        const val MAX_PHOTOS = 3
-    }
-
     var flashOn by mutableStateOf(false)
         private set
-    var capturing by mutableStateOf(false)
+    var analyzing by mutableStateOf(false)
         private set
     var error by mutableStateOf<String?>(null)
         private set
 
-    /** Observable snapshot of the session's photo paths for the UI. */
-    var photoPaths by mutableStateOf<List<String>>(emptyList())
-        private set
-
-    val photoCount: Int
-        get() = photoPaths.size
-
-    val canAddMore: Boolean
-        get() = photoCount < MAX_PHOTOS
-
     private var imageCapture: ImageCapture? = null
-
-    init {
-        refreshPhotos()
-    }
 
     fun onCaptureReady(capture: ImageCapture) {
         imageCapture = capture
@@ -56,14 +38,9 @@ class ScanViewModel @Inject constructor(
         flashOn = !flashOn
     }
 
-    /** Captures a photo and appends it to the session (max [MAX_PHOTOS]). */
-    fun takePhoto() {
-        if (!canAddMore) {
-            error = "Maximum $MAX_PHOTOS photos per scan."
-            return
-        }
+    fun takePhoto(onDone: () -> Unit) {
         val capture = imageCapture ?: return
-        capturing = true
+        analyzing = true
         error = null
         val file = File(appContext.cacheDir, "scan_${System.currentTimeMillis()}.jpg")
         val output = ImageCapture.OutputFileOptions.Builder(file).build()
@@ -72,73 +49,21 @@ class ScanViewModel @Inject constructor(
             ContextCompat.getMainExecutor(appContext),
             object : ImageCapture.OnImageSavedCallback {
                 override fun onImageSaved(results: ImageCapture.OutputFileResults) {
-                    session.photoPaths.add(file.absolutePath)
-                    refreshPhotos()
-                    capturing = false
+                    session.lastPhotoPath = file.absolutePath
+                    analyzing = false
+                    onDone()
                 }
 
                 override fun onError(e: ImageCaptureException) {
-                    capturing = false
+                    analyzing = false
                     error = "Capture failed: ${e.message}"
                 }
             }
         )
     }
 
-    /**
-     * Copies a gallery content URI into a temp file in cacheDir, then
-     * appends the file path to the session so it can be uploaded.
-     */
-    fun useGalleryImage(uri: Uri) {
-        if (!canAddMore) {
-            error = "Maximum $MAX_PHOTOS photos per scan."
-            return
-        }
-        error = null
-        try {
-            val file = File(appContext.cacheDir, "gallery_${System.currentTimeMillis()}.jpg")
-            val copied = appContext.contentResolver.openInputStream(uri)?.use { input ->
-                file.outputStream().use { output ->
-                    input.copyTo(output)
-                }
-                true
-            } ?: false
-            if (!copied || !file.exists()) {
-                error = "Couldn't read that image."
-                return
-            }
-            session.photoPaths.add(file.absolutePath)
-            refreshPhotos()
-        } catch (e: Exception) {
-            error = "Couldn't import that image: ${e.message}"
-        }
-    }
-
-    fun removePhoto(index: Int) {
-        if (index in session.photoPaths.indices) {
-            val removed = session.photoPaths.removeAt(index)
-            try {
-                File(removed).delete()
-            } catch (_: Exception) {
-                // Best effort; the path is already removed from the session.
-            }
-            refreshPhotos()
-        }
-    }
-
-    fun clearPhotos() {
-        session.photoPaths.forEach { path ->
-            try {
-                File(path).delete()
-            } catch (_: Exception) {
-                // Best effort cleanup.
-            }
-        }
-        session.clearPhotos()
-        refreshPhotos()
-    }
-
-    private fun refreshPhotos() {
-        photoPaths = session.photoPaths.toList()
+    fun useGalleryImage(uri: Uri, onDone: () -> Unit) {
+        session.lastPhotoPath = uri.toString()
+        onDone()
     }
 }
