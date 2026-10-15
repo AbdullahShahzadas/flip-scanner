@@ -1,0 +1,6 @@
+﻿{
+    "id":  "cmd-idle",
+    "exit_code":  0,
+    "output":  "[idle] No task. Runner is standing by.\r\n",
+    "finished_at":  "2026-10-15T05:40:46.7783509Z"
+}
