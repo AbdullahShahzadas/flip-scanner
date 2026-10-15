@@ -1,5 +1,5 @@
 {
-  "id": "cmd-p3-verify",
-  "command": "$app = \"C:\\Users\\Abdullah G\\Desktop\\Website\\flip-scanner-app\"\ngit -C $app fetch origin 2>&1 | Select-Object -Last 1\ngit -C $app reset --hard origin/main 2>&1 | Select-Object -Last 1\n\"=== check Part 3 files ===\"\nTest-Path (Join-Path $app \"android\\app\\src\\main\\java\\com\\flipscanner\\app\\data\\remote\\FlipScannerApi.kt\")\nTest-Path (Join-Path $app \"android\\app\\src\\main\\java\\com\\flipscanner\\app\\data\\repository\\ScanRepository.kt\")\nTest-Path (Join-Path $app \"backend\\src\\Api\\ScanController.php\")\n",
-  "timeout_seconds": 120
+  "id": "cmd-p3-rebuild",
+  "command": "$app = \"C:\\Users\\Abdullah G\\Desktop\\Website\\flip-scanner-app\"\n$android = Join-Path $app \"android\"\ngit -C $app fetch origin 2>&1 | Select-Object -Last 1\ngit -C $app reset --hard origin/main 2>&1 | Select-Object -Last 1\n$env:JAVA_HOME = \"C:\\Users\\Abdullah G\\Desktop\\Website\\flip-scanner\\tools\\jdk-21\"\n$env:ANDROID_HOME = \"C:\\Users\\Abdullah G\\Desktop\\Website\\flip-scanner\\Android\\Sdk\"\n$env:ANDROID_SDK_ROOT = $env:ANDROID_HOME\n$env:Path = \"$env:JAVA_HOME\\bin;$env:Path\"\ncd $android\n.\\gradlew.bat assembleDebug 2>&1 | Select-Object -Last 40\n\"=== APK? ===\"\nGet-ChildItem (Join-Path $android \"app\\build\\outputs\\apk\\debug\") -Filter \"*.apk\" | Select-Object Name, @{n=\"MB\";e={[math]::Round($_.Length/1MB,1)}}\n",
+  "timeout_seconds": 900
 }
